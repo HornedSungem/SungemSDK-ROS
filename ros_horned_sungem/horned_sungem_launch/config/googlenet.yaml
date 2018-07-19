@@ -1,0 +1,7 @@
+graph_file_path: "/opt/SungemSDK-GraphModels/graphs/graph_googlenet"
+category_file_path: "/opt/SungemSDK-GraphModels/misc/imagenet1000.txt"
+network_dimension: 224
+channel1_mean: 104.0069879317889
+channel2_mean: 116.66876761696767
+channel3_mean: 122.6789143406786
+scale: 1.0

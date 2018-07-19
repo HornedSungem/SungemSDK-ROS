@@ -1,0 +1,7 @@
+graph_file_path: "/opt/SungemSDK-GraphModels/graphs/graph_yolo"
+category_file_path: "/opt/SungemSDK-GraphModels/misc/voc20.txt"
+network_dimension: 448
+channel1_mean: 0
+channel2_mean: 0
+channel3_mean: 0
+scale: 0.00392156
