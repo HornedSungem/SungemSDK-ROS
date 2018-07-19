@@ -15,7 +15,7 @@
 
   ```bash
   sudo apt-get update
-  sudo apt-get install ros-kinetic-desktop    
+  sudo apt-get install ros-kinetic-desktop
   ```
   安装不上就科学上网一下
   3. 安装rosdep,rosdep为要编译的源代码安装系统依赖项，并且需要在ROS中运行一些核心组件。
@@ -23,7 +23,7 @@
   ```sh
   sudo rosdep init
   rosdep update
-  ```  
+  ```
 
   4. 如果报错多尝试几次，实在不行删除配置文件
 
@@ -50,7 +50,7 @@
   sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential
   ```
 
-**添加代理方式**：使用shandowsock-qt5,配置完毕以后，执行下列命令
+**添加代理方式**：配置完毕代理以后，执行下列命令
 
   ```
   sudo apt-get -o Acquire::http::proxy="http://127.0.0.1:1080/" update
@@ -100,7 +100,7 @@
   3. 下载SungemSDK-ROS
 
   ```
-  git clone http://192.168.0.7/HornedSungem/sdk/SungemSDK-ROS.git
+  git clone https://github.com/HornedSungem/SungemSDK-ROS.git
   ```
   4. 使用catkin编译生成build和devel文件
 
@@ -173,7 +173,7 @@
       - GoogLeNet
       - SqueezeNet
       - Inception_v1,Inception_v2,Inception_v3,Inception_v4
-      - MobileNet  
+      - MobileNet
     - camera:默认值为hs
       - hs
       - usb
