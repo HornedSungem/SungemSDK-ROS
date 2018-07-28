@@ -70,19 +70,19 @@
   2. 拷贝hs.h接口头文件到/usr/local/include，SungemSDK-ROS需要引用该头文件，所以需拷贝到系统目录下
 
   ```
-  sudo cp -i <workspace>/SungemSDK/api/includes/hs.h  /usr/local/include
+  sudo cp -i <workspace>/SungemSDK/api/include/hs.h  /usr/local/include
   ```
   3. 根据您当前系统的架构选择对应文件夹下的libhs.so,拷贝该文件到/usr/local/lib
 
   ```
-  sudo cp -i <workspace>/SungemSDK/api/lib/linux/x86_64/libhs.so /usr/local/lib
+  sudo cp -i <workspace>/SungemSDK/api/libs/linux/x86_64/libhs.so /usr/local/lib
   ```
 
   4. 准备需要的资源文件，model及data文件，git最新SungemSDK-GraphModels,或从百度云盘中下载，并把该目录link到系统下,如果不想放在系统下，你可以修改horned_sungem_launch目录下config下每次模型类型的graph_file_path和category_file_path参数，确保路径下能找到该文件即可。
 
     ```
     git clone https://github.com/HornedSungem/SungemSDK-GraphModels.git
-    sudo ln -s <workspace>/SungemSDK-GraphModels /opt/SungemSDK-GraphModels
+    sudo ln -s <workspace>/SungemSDK-GraphModels/ /opt/SungemSDK-GraphModels
     ```
 
 ### 创建ROS工作空间
@@ -160,7 +160,7 @@
         打开新的终端，加载图像
 
         ```
-        ROSlaunch horned_sungem_launch hs_classification_example.launch camera_topic:="/hs/camera/image_raw"
+        roslaunch horned_sungem_launch hs_classification_example.launch camera_topic:="/hs/camera/image_raw"
         ```
 
 ## 3 参数说明
