@@ -82,7 +82,7 @@
 
     ```
     git clone https://github.com/HornedSungem/SungemSDK-GraphModels.git
-    sudo ln -s <workspace>/SungemSDK-GraphModels /opt/SungemSDK-GraphModels
+    sudo ln -s <workspace>/SungemSDK-GraphModels/ /opt/SungemSDK-GraphModels
     ```
 
 ### 创建ROS工作空间
@@ -160,7 +160,7 @@
         打开新的终端，加载图像
 
         ```
-        ROSlaunch horned_sungem_launch hs_classification_example.launch camera_topic:="/hs/camera/image_raw"
+        roslaunch horned_sungem_launch hs_classification_example.launch camera_topic:="/hs/camera/image_raw"
         ```
 
 ## 3 参数说明
