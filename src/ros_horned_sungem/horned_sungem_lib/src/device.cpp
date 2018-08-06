@@ -63,12 +63,12 @@ void Device::monitorThermal() const
 
   if (level == High)
   {
-    throw HsHighThermal();
+    // throw HsHighThermal();
   }
 
   if (level == Aggressive)
   {
-    throw HsAggressiveThermal();
+    // throw HsAggressiveThermal();
   }
 }
 

@@ -34,7 +34,7 @@ include_directories(${OpenCV_INCLUDE_DIRS} )
 
 find_path(HS_HEADER_FILE
         hs.h
-    
+
         PATHS ENV ROS_ROOT
           )
 if(NOT HS_HEADER_FILE)
@@ -54,8 +54,8 @@ add_library(${PROJECT_NAME}
  )
 
 
-add_dependencies(${PROJECT_NAME} 
-    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
+add_dependencies(${PROJECT_NAME}
+    ${${PROJECT_NAME}_EXPORTED_TARGETS}
     ${catkin_EXPORTED_TARGETS}
 )
 
@@ -80,7 +80,6 @@ target_link_libraries(${PROJECT_NAME}
    ${OpenCV_LIBRARIES}
    libhs.so
 )
-
 
 # Flags
 if(UNIX OR APPLE)
@@ -155,7 +154,3 @@ install(TARGETS ${PROJECT_NAME}
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-
-
-
