@@ -55,9 +55,10 @@
 
   1. 下载SungemSDK基础SDK，保证你的环境安装了git，如果没有安装，请参照百度经验[ubuntu 安装git](https://jingyan.baidu.com/article/915fc414ba51be51394b20c9.html)，git下来角蜂鸟的SDK
 
-    ```
-    git clone https://github.com/HornedSungem/SungemSDK.git
-    ```
+  ```
+  git clone https://github.com/HornedSungem/SungemSDK.git
+  ```
+
   **如已下载SungemSDK，请更新保证它是最新版本**
 
   2. 拷贝hs.h接口头文件到/usr/local/include，SungemSDK-ROS需要引用该头文件，所以需拷贝到系统目录下
@@ -73,46 +74,45 @@
 
   4. 如果未执行过SungemSDK的install.sh脚本文件，就需要将SungemSDK里的99-hornedsungem.rules文件拷贝到系统rule.d下，并给予执行权限
 
-    ```bash
-    sudo cp ../config/99-hornedsungem.rules /etc/udev/rules.d/
-    sudo chmod +x /etc/udev/rules.d/99-hornedsungem.rules
-    sudo udevadm control --reload
-    sudo udevadm trigger
-    ```
+  ```bash
+  sudo cp ../config/99-hornedsungem.rules /etc/udev/rules.d/
+  sudo chmod +x /etc/udev/rules.d/99-hornedsungem.rules
+  sudo udevadm control --reload
+  sudo udevadm trigger
+  ```
 
-  5. 准备需要的资源文件，model及data文件，git最新SungemSDK-GraphModels,或从百度云盘中下载，并把该目录link或拷贝到系统下,如果不想放在系统下，你可以修改horned_sungem_launch/config目录下配置文件的graph_file_path和category_file_path参数，确保路径下能找到该文件即可。
+  5. 准备需要的资源文件，model及data文件，git最新SungemSDK-GraphModels,或从百度云盘中下载，并把该目录link或拷贝到系统下,如果不想放在系统下，你可以修改horned_sungem_launch/config目录下模型配置文件的graph_file_path和category_file_path参数，确保路径下能找到该文件即可。
 
-    ```
-    git clone https://github.com/HornedSungem/SungemSDK-GraphModels.git
-    sudo cp -r <workspace>/SungemSDK-GraphModels /opt/SungemSDK-GraphModels
-    ```
+  ```
+  git clone https://github.com/HornedSungem/SungemSDK-GraphModels.git
+  sudo cp -r <workspace>/SungemSDK-GraphModels /opt/SungemSDK-GraphModels
+  ```
 
 ## 2 具体使用ROS
 
   1. 下载SungemSDK-ROS
 
-    ```
-    git clone https://github.com/HornedSungem/SungemSDK-ROS.git
-    ```
+  ```
+  git clone https://github.com/HornedSungem/SungemSDK-ROS.git
+  ```
   2. 使用catkin编译生成build和devel文件
 
-    ```
-    cd SungemSDK-ROS
-    catkin_make
-    ```
+  ```
+  cd SungemSDK-ROS
+  catkin_make
+  ```
 
   3. 执行source命令，依次执行文件中的语句，使刚修改的初始化文件生效
 
-    ```
-    source devel/setup.bash
-    ```
+  ```
+  source devel/setup.bash
+  ```
   4. 确保ROS包路径正确
 
-    ```
-    echo $ROS_PACKAGE_PATH
-    /home/<user_name>/catkin_<name>/src:/opt/ros/kinetic/share
-    ```
-
+  ```
+  echo $ROS_PACKAGE_PATH
+  /home/<user_name>/catkin_<name>/src:/opt/ros/kinetic/share
+  ```
 
 ###  如何使用SungemSDK-ROS
   配置完上述环境，下面就跟大家介绍下如何使用SungemSDK-ROS。 根据需求，我们提供了俩种模式：
