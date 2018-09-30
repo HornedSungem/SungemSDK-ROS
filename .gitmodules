@@ -1,4 +1,3 @@
 [submodule "src/SungemSDK"]
 	path = src/SungemSDK
-	url=https://github.com/HornedSungem/SungemSDK.git
-	branch = master
+	url = https://github.com/HornedSungem/SungemSDK.git
