@@ -100,11 +100,6 @@ void ExceptionUtil::tryToThrowHsException(int code)
       throw HsTimeout(msg);
     }
 
-    if (code == HS_MVCMD_NOT_FOUND)
-    {
-      throw HsMvCmdNotFound(msg);
-    }
-
     if (code == HS_NO_DATA)
     {
       throw HsNoData(msg);

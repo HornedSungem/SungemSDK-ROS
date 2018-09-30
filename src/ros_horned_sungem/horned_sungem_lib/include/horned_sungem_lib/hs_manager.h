@@ -34,7 +34,8 @@ struct ImageFrame
 class HSManager
 {
 public:
-  HSManager(const int &max_device_number,
+  HSManager(const Device::Ptr &device,
+            const int &max_device_number,
             const int &device_index,
             const Device::LogLevel &log_level,
             const std::string &camera,
@@ -61,6 +62,7 @@ private:
   void initDeviceManager();
   void deviceThread(int device_index);
   void deviceBySelfThread(int device_index);
+  Device::Ptr device_;
   const int max_device_number_;
   const int start_device_index_;
   const Device::LogLevel log_level_;

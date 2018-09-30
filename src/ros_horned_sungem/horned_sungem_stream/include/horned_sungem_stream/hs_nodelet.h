@@ -31,6 +31,7 @@
 #include "horned_sungem_lib/connect.h"
 #include "horned_sungem_lib/hs_manager.h"
 #include "horned_sungem_lib/result.h"
+#include "horned_sungem_lib/device.h"
 namespace horned_sungem_stream
 {
 typedef boost::function<void(horned_sungem_lib::ClassificationResultPtr result, std_msgs::Header header)> FUNP_C;
@@ -64,7 +65,7 @@ private:
   image_transport::Subscriber sub_;
   ros::NodeHandle nh_;
   ros::NodeHandle pnh_;
-
+  horned_sungem_lib::Device::Ptr device_;
   int max_device_number_;
   int start_device_index_;
   int log_level_;

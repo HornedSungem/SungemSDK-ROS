@@ -41,6 +41,7 @@ HSImpl::HSImpl(ros::NodeHandle &nh, ros::NodeHandle &pnh)
     : hs_manager_handle_(nullptr),
       nh_(nh),
       pnh_(pnh),
+      device_(nullptr),
       max_device_number_(255),
       start_device_index_(0),
       log_level_(Device::Errors),
@@ -219,8 +220,10 @@ void HSImpl::getParameters()
 
 void HSImpl::init()
 {
+   device_.reset(new Device(start_device_index_,
+                           static_cast<Device::LogLevel>(log_level_)));
 
-  hs_manager_handle_ = std::make_shared<horned_sungem_lib::HSManager>(
+  hs_manager_handle_ = std::make_shared<horned_sungem_lib::HSManager>(device_,
       max_device_number_,
       start_device_index_,
       static_cast<Device::LogLevel>(log_level_),
@@ -233,6 +236,7 @@ void HSImpl::init()
       mean_,
       scale_,
       top_n_);
+
 
   std::shared_ptr<ImageTransport> it = std::make_shared<ImageTransport>(nh_);
   

@@ -1,85 +1,67 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(horned_sungem_lib)
 
-## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
-## Find catkin macros and libraries
-## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
-## is used, also find other catkin packages
+set(LIBHS ../../SungemSDK)
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+  set(LIBHS_LIB ${LIBHS}/lib/linux/${CMAKE_SYSTEM_PROCESSOR})
+else()
+  message(FATAL_ERROR "Unsupported platforms ${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+endif()
+
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  roslint
-  rospy
-  rostest
-)
+        roscpp
+        roslint
+        rospy
+        rostest
+        )
 
 
 catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES  ${PROJECT_NAME}
-  CATKIN_DEPENDS roscpp roslint rospy rostest
+        INCLUDE_DIRS include
+        LIBRARIES  ${PROJECT_NAME}
+        CATKIN_DEPENDS roscpp roslint rospy rostest
 )
 
 
 include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
+        include
+        ${catkin_INCLUDE_DIRS}
+        ${LIBHS}/include
 )
 
+link_directories(${LIBHS_LIB})
 
 # add opencv dependency
 find_package(OpenCV 3 REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS} )
 
-find_path(HS_HEADER_FILE
-        hs.h
-
-        PATHS ENV ROS_ROOT
-          )
-if(NOT HS_HEADER_FILE)
-  message(FATAL_ERROR "Can't find hs.h, please install Sungem SDK according to
-          https://github.com/HornedSungem/SungemSDK")
-endif()
 
 add_library(${PROJECT_NAME}
-  src/connect.cpp
-  src/device.cpp
-  src/exception.cpp
-  src/exception_util.cpp
-  src/graph.cpp
-  src/tensor.cpp
-  src/result.cpp
-  src/hs_manager.cpp
- )
+        src/connect.cpp
+        src/device.cpp
+        src/exception.cpp
+        src/exception_util.cpp
+        src/graph.cpp
+        src/tensor.cpp
+        src/result.cpp
+        src/hs_manager.cpp
+        )
 
 
 add_dependencies(${PROJECT_NAME}
-    ${${PROJECT_NAME}_EXPORTED_TARGETS}
-    ${catkin_EXPORTED_TARGETS}
-)
+        ${${PROJECT_NAME}_EXPORTED_TARGETS}
+        ${catkin_EXPORTED_TARGETS}
+        )
 
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/horned_sungem_lib_node.cpp)
 
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
-   ${catkin_LIBRARIES}
-   ${OpenCV_LIBRARIES}
-   libhs.so
-)
+        hs
+        ${catkin_LIBRARIES}
+        ${OpenCV_LIBRARIES}
+
+        )
 
 # Flags
 if(UNIX OR APPLE)
@@ -129,28 +111,15 @@ if(UNIX OR APPLE)
 endif()
 
 
-#############
-## Install ##
-#############
-
-# all install targets should use catkin DESTINATION variables
-# See http://ros.org/doc/api/catkin/html/adv_user_guide/variables.html
-
-## Mark executable scripts (Python etc.) for installation
-## in contrast to setup.py, you can choose the destination
-# install(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
 
 # Install nodelet library
 install(TARGETS ${PROJECT_NAME}
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+        )
 
 # Install header files
 install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-)
+        DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+        )
